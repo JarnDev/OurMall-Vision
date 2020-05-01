@@ -13,9 +13,10 @@ function Lojas({ loja }) {
           
           <View style={styles.rightSeparator}>
 
-            <ScrollView centerContent style={styles.description}>
-                <Text style={styles.descriptiontext}>{loja.description}</Text>
-            </ScrollView>
+            <View style={styles.description}>
+                <Text numberOfLines={4} style={styles.descriptiontext}>{loja.description}</Text>
+            </View>
+            
             <FlatList
                     data={loja.produtos}
                     keyExtractor={item => String(item)}
@@ -25,6 +26,7 @@ function Lojas({ loja }) {
                         )
                     }
                     horizontal={true}
+                    showsHorizontalScrollIndicator={false}
                     style={{flexGrow: 0, borderTopWidth:1, borderTopColor:'black'}}
                 />
 

@@ -1,4 +1,5 @@
 import React, {useState,useEffect,createRef} from 'react'
+import ToastNotification from 'react-native-toast-notification'
 
 import { 
     View, 
@@ -9,6 +10,7 @@ import {
     TouchableOpacity,
     KeyboardAvoidingView, 
     FlatList,
+    Dimensions,
     SafeAreaView } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker';
@@ -25,8 +27,8 @@ import Lojas from '../../componentes/lojas'
 
 const search = ({navigation}) => {
     const [searchValue, setSearchValue] = useState()
-    const [displayData, setDisplayData] = useState()
-
+    const [displayData, setDisplayData] = useState(db)
+    const [ showToast, setShowToast] = useState(false)
     useEffect(() => {
         (async () => {
           const { status } = await Camera.requestPermissionsAsync();
@@ -62,7 +64,7 @@ const search = ({navigation}) => {
             .then(response => response.text())
             .then(result => {
                 console.log(result)
-                handleChange(result)
+                handleChange(result,true)
             })
             .catch(error => console.log('error', error));
           }
@@ -73,9 +75,10 @@ const search = ({navigation}) => {
       };
 
     
-    function handleChange(text){
+    function handleChange(text, ML=false){
         let new_display = []
-        if(text){
+
+        if(text !== ''){
             const re = /,/;
             let filtros = text.split(re).filter(tag => (tag !== ''))
     
@@ -91,15 +94,21 @@ const search = ({navigation}) => {
                 }
             }
             // console.log(filtros, new_display)
+            setDisplayData(new_display)
+        }else{
+            setDisplayData(db)
         }
         setSearchValue(text)
-        setDisplayData(new_display)
+        if(new_display.length===0 && ML) {
+            setShowToast(true)
+        }
     }
-
 
     return (
 
+        <>
         <View style={styles.container}>
+
             <View style={styles.takePicture}>
                 <TextInput
                     style={styles.searchInput}
@@ -113,26 +122,55 @@ const search = ({navigation}) => {
                 <TouchableOpacity
                     style={styles.button}
                     onPress={_pickImage}
+                    // onPress={toast}
                 >
                     <MaterialIcons  name="photo-camera" size={40} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => handleChange()}><Text>Limpar</Text></TouchableOpacity>
             </View>
-            <SafeAreaView>
-                <FlatList
-                    data={displayData}
-                    keyExtractor={item => String(item.id)}
-                    renderItem={
-                        ({item}) => (
-                            <Lojas loja={item}/>
-                        )
-                    }
-                
-                
-                />
-            </SafeAreaView>
+            <>
+            { displayData.length!==0?
+                (
+                    <SafeAreaView style={{flex:1}}>
+                        <FlatList
+                            data={displayData}
+                            keyExtractor={item => String(item.id)}
+                            showsHorizontalScrollIndicator={false}
+                            renderItem={
+                                ({item}) => (
+                                    <Lojas loja={item}/>
+                                )
+                            }
+                            // style={{height:Dimensions.get('window').height-100}}
+                        
+                        />
+                    </SafeAreaView>
+                )    
+                    :
+                (
+                    <View style={styles.alt}><Text style={styles.altText}>Item não consta no catálogo de nossas lojas!</Text></View>
+                )
+        
+            }
+            
+            </>
         </View>
         
+        { showToast?
+            (
+            <ToastNotification
+                textStyle={{ color: 'white' }}
+                style={{ backgroundColor: 'red' , padding:10}}
+                text="Item não consta no catálogo de nossas lojas :("
+                duration={2000}
+                onHide={() => setShowToast(false)}
+                positionValue={300}
+            />
+            )
+            :
+            null 
+        }
+        </>
     )
 }
 
@@ -171,6 +209,16 @@ var styles = StyleSheet.create({
         borderRadius:25,
         padding: 10,
         height:50
+      },
+      alt:{
+          flex:1,
+          justifyContent:"center",
+          alignItems:"center",
+          
+
+      },
+      altText:{
+          color:'rgba(255,0,0,.5)'
       }
   });
 
