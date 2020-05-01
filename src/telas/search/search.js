@@ -126,7 +126,7 @@ const search = ({navigation}) => {
                 >
                     <MaterialIcons  name="photo-camera" size={40} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleChange()}><Text>Limpar</Text></TouchableOpacity>
+                <TouchableOpacity onPress={() => handleChange('')}><Text>Limpar</Text></TouchableOpacity>
             </View>
             <>
             { displayData.length!==0?
