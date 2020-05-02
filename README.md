@@ -9,8 +9,7 @@ Um sistema de inteligencia de classificação com visão computacional que receb
 
 1. Instalar o aplicativo EXPO no seu Aparelho Celular: https://expo.io/tools#client
 2. Utilizar a função QR code do app aqui:
-
-![image](https://user-images.githubusercontent.com/20113585/80895011-b6fa1280-8cb6-11ea-8049-54cff2684751.png)
+<img src="https://user-images.githubusercontent.com/20113585/80895011-b6fa1280-8cb6-11ea-8049-54cff2684751.png" width="200" height="200" />
 
 
 
