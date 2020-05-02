@@ -18,6 +18,6 @@ Um sistema de inteligencia de classificação com visão computacional que receb
 ## IA Server
 1. Instalar python na maquina: https://www.python.org/downloads/
 2. Instala requerimentos do projeto: ```pip install -r requirements.txt```
-3. Roda o servidor: ```python ./server.py```
+3. Roda o servidor: ```python ./api_computer_vision/server.py```
 
 Pronto, agora pode testar!
