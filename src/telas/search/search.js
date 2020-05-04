@@ -1,5 +1,6 @@
 import React, {useState,useEffect,createRef} from 'react'
 import ToastNotification from 'react-native-toast-notification'
+import exp from 'expo-constants'
 
 import { 
     View, 
@@ -14,7 +15,7 @@ import {
     SafeAreaView } from 'react-native'
 
 import * as ImagePicker from 'expo-image-picker';
-import { Camera } from 'expo-camera';
+import { Camera, Constants } from 'expo-camera';
 import {MaterialIcons} from '@expo/vector-icons'
 
 import db from '../../../db'
@@ -108,7 +109,7 @@ const search = ({navigation}) => {
 
         <>
         <View style={styles.container}>
-
+            <MaterialIcons style={{marginLeft:10}}  name="arrow-back" color='black' size={30}/>
             <View style={styles.takePicture}>
                 <TextInput
                     style={styles.searchInput}
@@ -124,9 +125,12 @@ const search = ({navigation}) => {
                     onPress={_pickImage}
                     // onPress={toast}
                 >
-                    <MaterialIcons  name="photo-camera" size={40} />
+                    <MaterialIcons  name="photo-camera" color='red' size={40} />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => handleChange('')}><Text>Limpar</Text></TouchableOpacity>
+                <TouchableOpacity style={styles.limpar} onPress={() => handleChange('')}>
+                    <Text style={styles.limparText}>Limpar</Text>
+                    <MaterialIcons  name="close" color='white' size={16} /> 
+                </TouchableOpacity>
             </View>
             <>
             { displayData.length!==0?
@@ -177,7 +181,8 @@ const search = ({navigation}) => {
 var styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor:"white"
+      backgroundColor:"#f4f8fb",
+      paddingTop: exp.statusBarHeight + 20,
     },
     takePicture:{
         margin:3,
@@ -185,29 +190,33 @@ var styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: "center",
         justifyContent:"space-around",
-        borderColor:"transparent",
-        borderWidth:1,
-        elevation:2,
-        height:80
+        backgroundColor:"transparent"
+        // borderColor:"transparent",
+        // borderWidth:1,
+        // elevation:2,
+        // height:80
 
     },
     searchInput:{
         width:200, 
         height: 40, 
-        borderColor: 'gray', 
         borderWidth: 1,
         margin: 2,
-        paddingLeft: 0,
-        borderColor:'transparent',
-        borderBottomColor:'black'
+        paddingLeft: 10,
+        backgroundColor: "#fff",
+        borderColor:"#fff",
+        borderRadius:10,
+        elevation:1
+
+        
      },
      button: {
         alignItems: "center",
         justifyContent:"center",
-        borderWidth: 1,
-        borderColor:"#ccc",
-        borderRadius:25,
-        padding: 10,
+        // borderWidth: 1,
+        // borderColor:"#ccc",
+        // borderRadius:25,
+        // padding: 10,
         height:50
       },
       alt:{
@@ -219,6 +228,20 @@ var styles = StyleSheet.create({
       },
       altText:{
           color:'rgba(255,0,0,.5)'
+      },
+      limpar:{
+        flexDirection:"row",
+        justifyContent:"center",
+        alignItems:"baseline",
+        backgroundColor:"#414244",
+        paddingHorizontal:12,
+        paddingVertical:5,
+        borderRadius:15,
+        elevation:1
+      },
+      limparText:{
+          color:"white",
+          fontWeight:"bold"
       }
   });
 

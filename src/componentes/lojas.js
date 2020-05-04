@@ -27,7 +27,7 @@ function Lojas({ loja }) {
                     }
                     horizontal={true}
                     showsHorizontalScrollIndicator={false}
-                    style={{flexGrow: 0, borderTopWidth:1, borderTopColor:'black'}}
+                    style={{flexGrow: 0, marginLeft:5}}
                 />
 
           </View>
@@ -37,12 +37,14 @@ function Lojas({ loja }) {
 
   var styles = StyleSheet.create({
       item: {
-        backgroundColor: '#eee',
-        marginVertical: 8,
+        backgroundColor:"transparent",
+        marginBottom: 15,
         marginHorizontal: 16,
-        height:100,
+        height:110,
         flexDirection: 'row',
-        elevation:3,
+        borderBottomColor:"#eee",
+        borderBottomWidth:1,
+        paddingBottom:15
       },
       rightSeparator:{
         flexDirection:'column',
@@ -53,9 +55,7 @@ function Lojas({ loja }) {
         width:100,
         alignItems:"center",
         justifyContent:"center",
-        borderRightColor:'blue',
-        borderRightWidth:2,
-        backgroundColor:'#000'
+        backgroundColor:'#b7d5f1'
       },
       textitle: {
         fontSize: 20,
@@ -77,11 +77,13 @@ function Lojas({ loja }) {
       tags:{
           fontSize:10,
           margin:5,
-          padding:3,
+          paddingVertical:3,
+          paddingHorizontal:8,
           backgroundColor:'purple',
           height:20,
           color:'#fff',
-          flex:.1
+          flex:.1,
+          borderRadius:10,
       }
   });
 
