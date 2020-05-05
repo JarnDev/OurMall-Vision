@@ -4,7 +4,7 @@
 
 Um sistema de inteligencia de classificação com visão computacional que recebe como input uma imagem enviada pelo aplicativo e responde o nome do produto para que seja pesquisado no banco de dados.
 
-![video-test (1)](https://user-images.githubusercontent.com/20113585/80892698-8f994a80-8ca2-11ea-8823-6895f0428e18.gif)
+![video-test (1)](https://user-images.githubusercontent.com/20113585/81022493-205b5c00-8e44-11ea-98f8-bae01b9ed463.gif)
 # Guia de Aceso Live
 
 1. Instalar o aplicativo EXPO no seu Aparelho Celular: https://expo.io/tools#client
