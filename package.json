@@ -24,7 +24,7 @@
     "react-native-screens": "~2.2.0",
     "react-native-toast-notification": "^1.1.2",
     "react-native-web": "~0.11.7",
-    "underscore": "^1.10.2",
+    "underscore": "^1.12.1",
     "expo-constants": "~9.0.0"
   },
   "devDependencies": {
